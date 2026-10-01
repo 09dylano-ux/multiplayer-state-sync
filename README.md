@@ -1,13 +1,3 @@
-# 6. Project 5: Multiplayer State Sync & Command Queue (C#)
-
-### Repository Name: `multiplayer-state-sync`
-### Required Files in Repo:
-- `MultiplayerSync.sln`
-- `ServerApp/` (Directory with `ServerApp.csproj` and `Server.cs`)
-- `ClientApp/` (Directory with `ClientApp.csproj` and `Client.cs`)
-- `README.md`
-
-### Copy & Paste Content for `README.md`:
 
 ```markdown
 # Multiplayer State Sync & Command Queue Engine
