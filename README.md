@@ -1,6 +1,13 @@
----
+# 6. Project 5: Multiplayer State Sync & Command Queue (C#)
 
-## 5. Multiplayer State Sync & Command Queue (C#)
+### Repository Name: `multiplayer-state-sync`
+### Required Files in Repo:
+- `MultiplayerSync.sln`
+- `ServerApp/` (Directory with `ServerApp.csproj` and `Server.cs`)
+- `ClientApp/` (Directory with `ClientApp.csproj` and `Client.cs`)
+- `README.md`
+
+### Copy & Paste Content for `README.md`:
 
 ```markdown
 # Multiplayer State Sync & Command Queue Engine
@@ -23,13 +30,38 @@ This architecture runs an **Authoritative Server** paired with **Client-Side Pre
 
 ---
 
-## How It Works (The Metaphor)
+## Architecture Diagram
+Client Input  --->  [ Local Prediction ]  ---> Instant Visual Feedback
+│
+(Sequence-Numbered Input)
+│
+▼
+[ Server Queue ]
+│
+(Authoritative Tick)
+│
+▼
+[ State Snapshot ]  ---> Client Reconciliation Check
+## Features
 
-Imagine playing an online game of chess by postal mail:
-
-* **Without Prediction:** You mail your move, wait 3 days for a reply, and don't move your piece on your board until the letter comes back.
-* **With Client-Side Prediction:** You move your piece instantly on your board and record your step in a notebook. When the official letter arrives from the referee 3 days later, you check if your board matches. If the referee denied your move, you erase your last steps and snap your piece back to where the referee says it belongs.
+- **Client-Side Prediction:** Eliminates perceived input latency on movement commands.
+- **Server Reconciliation:** Corrects client drift without jitter or snapping when packet loss occurs.
+- **Entity Interpolation:** Smooths visual positions of remote entities using a configurable interpolation buffer delay.
+- **Packet Loss Simulation:** Built-in network simulator to test stability under lag, jitter, and dropped packets.
 
 ---
 
-## Architecture Diagram
+## How to Run
+
+### Running in Visual Studio:
+1. Open `MultiplayerSync.sln`.
+2. Right-click the Solution in Solution Explorer > **Set Startup Projects...**
+3. Select **Multiple startup projects** and set both `ServerApp` and `ClientApp` to **Start**.
+4. Press `F5`.
+
+### Running in VS Code / Terminal:
+1. Open two terminal windows (`Ctrl + ~`).
+2. In Terminal 1 (Run the Server):
+   ```bash
+   cd ServerApp
+   dotnet run
